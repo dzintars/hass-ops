@@ -1,0 +1,9 @@
+---
+workstations:
+  hosts:
+    workstation:
+
+all:
+  children:
+    workstations:
+...

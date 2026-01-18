@@ -1,0 +1,30 @@
+---
+# ansible/roles/build-tools/defaults/main.yml
+
+# Packages to install
+build_tools_packages:
+  - mkosi
+  - make
+  - qemu-kvm
+  - libvirt
+  - libvirt-daemon-kvm
+  - virt-install
+  - virt-manager
+  - python3-pip
+  - libsecret
+  - ShellCheck
+
+# Python packages for development
+build_tools_pip_packages:
+  - pre-commit
+  - ansible-lint
+  - yamllint
+
+# Services to enable
+build_tools_services:
+  - libvirtd
+
+# Groups to add user to
+build_tools_user_groups:
+  - libvirt
+  - kvm

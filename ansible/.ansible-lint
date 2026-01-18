@@ -1,0 +1,22 @@
+---
+exclude_paths:
+  - .cache/
+  - build/
+  - .git/
+  - mkosi/mkosi.cache/
+  - '*.raw'
+  - '*.efi'
+
+skip_list:
+  - yaml[line-length]  # Allow longer lines for readability
+  - name[casing]  # Allow flexible naming
+
+warn_list:
+  - experimental  # Warn on experimental features
+
+# Enable offline mode for faster local runs
+offline: false
+
+# Use YAML for output
+quiet: false
+verbosity: 1

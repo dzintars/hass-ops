@@ -1,0 +1,14 @@
+---
+# ansible/roles/build-tools/meta/main.yml
+galaxy_info:
+  role_name: build_tools
+  author: hass-ops
+  description: Install build tools for hass-ops (mkosi, make, KVM, QEMU, libvirt)
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+
+dependencies: []

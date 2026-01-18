@@ -1,0 +1,31 @@
+---
+extends: default
+
+rules:
+  line-length:
+    max: 120
+    level: warning
+
+  indentation:
+    spaces: 2
+    indent-sequences: true
+
+  comments-indentation: false
+  comments:
+    min-spaces-from-content: 1
+
+  braces:
+    max-spaces-inside: 1  # Required by ansible-lint
+
+  octal-values:
+    forbid-implicit-octal: true  # Required by ansible-lint
+    forbid-explicit-octal: true  # Required by ansible-lint
+
+  truthy:
+    allowed-values: ['true', 'false', 'yes', 'no']
+
+ignore: |
+  build/
+  .cache/
+  .git/
+  mkosi/mkosi.cache/

@@ -1,0 +1,65 @@
+---
+# ansible/roles/build-tools/tasks/main.yml
+
+- name: Install build tools and virtualization packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ build_tools_packages }}"
+  become: true
+
+- name: Enable and start libvirtd service
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop: "{{ build_tools_services }}"
+  become: true
+
+- name: Add current user to virtualization groups
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: "{{ build_tools_user_groups }}"
+    append: true
+  become: true
+
+- name: Install Python development tools
+  ansible.builtin.pip:
+    name: "{{ build_tools_pip_packages }}"
+    state: present
+    extra_args: --user
+  become: false
+
+- name: Get repository root directory
+  ansible.builtin.command: git rev-parse --show-toplevel
+  register: git_root
+  changed_when: false
+  failed_when: false
+
+- name: Configure git commit template
+  community.general.git_config:
+    name: commit.template
+    value: "{{ git_root.stdout }}/.gitmessage"
+    scope: local
+    repo: "{{ git_root.stdout }}"
+  when: git_root.rc == 0
+  become: false
+
+- name: Verify KVM module is loaded
+  ansible.builtin.command: lsmod
+  register: lsmod_output
+  changed_when: false
+
+- name: Check if KVM is available
+  ansible.builtin.assert:
+    that:
+      - "'kvm' in lsmod_output.stdout"
+    fail_msg: "KVM module not loaded. Please enable virtualization in BIOS."
+    success_msg: "KVM is available and ready to use."
+
+- name: Display post-installation message
+  ansible.builtin.debug:
+    msg:
+      - "Build tools installed successfully!"
+      - "You may need to log out and log back in for group changes to take effect."
+      - "Run 'make build' to create your first image."

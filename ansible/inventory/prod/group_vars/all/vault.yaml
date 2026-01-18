@@ -1,0 +1,6 @@
+---
+# Encrypted production variables
+# Create with: ansible-vault create inventory/prod/group_vars/all/vault.yaml
+# Edit with: ansible-vault edit inventory/prod/group_vars/all/vault.yaml
+
+# vault_ansible_become_pass: changeme

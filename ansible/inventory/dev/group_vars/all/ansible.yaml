@@ -1,0 +1,7 @@
+---
+# ansible_host: localhost
+ansible_connection: local
+# ansible_user: dzintars
+ansible_become_pass: '{{ vault_ansible_become_pass }}'
+ansible_ssh_common_args: -F inventory/dev/.ssh/config
+...

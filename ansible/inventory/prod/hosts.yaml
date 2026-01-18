@@ -1,0 +1,21 @@
+---
+# Production inventory - remote infrastructure
+all:
+  children:
+    workstations:
+      hosts:
+        # workstation-01:
+        #   ansible_host: 192.168.1.10
+        #   ansible_user: ansible
+
+    pxe_servers:
+      hosts:
+        # pxe-01:
+        #   ansible_host: 192.168.1.20
+        #   ansible_user: ansible
+
+    test_nodes:
+      hosts:
+        # test-node-01:
+        #   ansible_host: 192.168.1.100
+        #   ansible_user: ansible

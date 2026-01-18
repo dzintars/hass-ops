@@ -1,0 +1,9 @@
+---
+# ansible/playbooks/setup-workstation.yml
+- name: Setup workstation for hass-ops development
+  hosts: workstations
+  gather_facts: true
+
+  roles:
+    - role: build-tools
+...
